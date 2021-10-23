@@ -17,12 +17,12 @@ public class AuthorController {
         this.authorDao = authorDao;
     }
 
-    @RequestMapping("/save")
+    @RequestMapping("/save/{firstName}/{lastName}")
     @ResponseBody
-    public String persist() {
+    public String persist(@PathVariable String firstName, @PathVariable String lastName) {
         Author author = new Author();
-        author.setFirstName("Jan");
-        author.setLastName("Kowalski");
+        author.setFirstName(firstName);
+        author.setLastName(lastName);
         authorDao.persist(author);
         return author.toString();
     }

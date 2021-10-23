@@ -17,11 +17,11 @@ public class PublisherController {
         this.publisherDao = publisherDao;
     }
 
-    @RequestMapping("/save")
+    @RequestMapping("/save/{name}")
     @ResponseBody
-    public String persist() {
+    public String persist(@PathVariable String name) {
         Publisher publisher = new Publisher();
-        publisher.setName("PWN");
+        publisher.setName(name);
         publisherDao.persist(publisher);
         return publisher.toString();
     }

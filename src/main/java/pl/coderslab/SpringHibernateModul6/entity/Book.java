@@ -2,19 +2,10 @@ package pl.coderslab.SpringHibernateModul6.entity;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Zadanie 1 - rozwiązywane z wykładowcą
- * W projekcie Spring01hibernate utwórz encje o nazwie Book.
- * Ustal nazwę tabeli bazy danych dla tej encji na books.
- * Encja ma zawierać następujące pola:
- * id
- * title (String)
- * rating (int)
- * description (String)
- * Uruchom aplikację, a następnie sprawdź, czy w bazie danych pojawiła się tabela.
- *
- */
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -28,6 +19,9 @@ public class Book {
 
     @ManyToOne
     private Publisher publisher;
+
+    @ManyToMany
+    private List<Author> authors = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -67,6 +61,14 @@ public class Book {
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     @Override
