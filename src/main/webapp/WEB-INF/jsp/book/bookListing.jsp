@@ -4,6 +4,9 @@
 <c:forEach items="${books}" var="b">
     <strong><c:out value="${b.title}: ${b.publisher.name}"/></strong><br>
     <c:out value="${b.description}"/>
+    <c:forEach items="${b.authors}" var="a" varStatus="loop">
+        <strong><c:out value="${a.firstName} ${a.lastName}"/></strong><c:if test="${loop.index + 1 lt b.authors.size()}">; </c:if>
+    </c:forEach>
     <hr>
 </c:forEach>
 
