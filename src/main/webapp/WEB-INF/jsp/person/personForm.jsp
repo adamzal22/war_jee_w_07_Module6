@@ -20,6 +20,4 @@
     Password: <input type="password" name="password"> <br />
     Email: <input type="email" name="email"> <br />
 
-    <input type="submit" value="Wysyłam"> <br />
-
-</form>--%>
+<c:out value="${student.firstName} ${student.lastName}"/>
