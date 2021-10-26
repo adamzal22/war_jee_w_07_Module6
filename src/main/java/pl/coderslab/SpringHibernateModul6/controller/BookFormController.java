@@ -2,10 +2,7 @@ package pl.coderslab.SpringHibernateModul6.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.SpringHibernateModul6.dao.AuthorDao;
 import pl.coderslab.SpringHibernateModul6.dao.BookDao;
 import pl.coderslab.SpringHibernateModul6.dao.PublisherDao;
@@ -29,21 +26,47 @@ public class BookFormController {
         this.authorDao = authorDao;
     }
 
-    @GetMapping("/show")
-    public String showBookForm(Model model) {
-        model.addAttribute("book", new Book());
-        return "/book/bookForm";
-    }
-
     @GetMapping("/all")
     public String showAllBooks(Model model) {
         model.addAttribute("books", bookDao.findAll());
         return "/book/bookListing";
     }
 
-    @PostMapping("/save")
+    @GetMapping("/add")
+    public String showBookForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "/book/bookForm";
+    }
+
+    @PostMapping("/add")
     public String saveBook(@ModelAttribute("book") Book book) {
         bookDao.persist(book);
+        return "redirect:/book/form/all";
+    }
+
+    @GetMapping("/edit")
+    public String prepareEdit(@RequestParam int idToEdit, Model model) {
+        model.addAttribute("book", bookDao.findById(idToEdit));
+        return "book/bookForm";
+    }
+
+    @PostMapping("/edit")
+    public String merge(@ModelAttribute("book") Book book) {
+        bookDao.merge(book);
+        return "redirect:/book/form/all";
+    }
+
+    @GetMapping("/remove")
+    public String prepareRemove(@RequestParam int toRemoveId, Model model) {
+        model.addAttribute("book", bookDao.findById(toRemoveId));
+        return "book/remove";
+    }
+
+    @PostMapping("/remove")
+    public String remove(@RequestParam String confirmed, @RequestParam int toRemoveId) {
+        if ("yes".equals(confirmed)) {
+            bookDao.remove(toRemoveId);
+        }
         return "redirect:/book/form/all";
     }
 
