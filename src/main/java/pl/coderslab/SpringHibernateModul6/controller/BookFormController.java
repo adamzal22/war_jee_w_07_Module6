@@ -16,9 +16,9 @@ import java.util.List;
 @RequestMapping("/book/form")
 public class BookFormController {
 
-    private PublisherDao publisherDao;
-    private BookDao bookDao;
-    private AuthorDao authorDao;
+    private final PublisherDao publisherDao;
+    private final BookDao bookDao;
+    private final AuthorDao authorDao;
 
     public BookFormController(PublisherDao publisherDao, BookDao bookDao, AuthorDao authorDao) {
         this.publisherDao = publisherDao;
