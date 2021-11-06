@@ -1,6 +1,10 @@
 package pl.coderslab.SpringHibernateModul6.entity;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +16,18 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @PESEL
+    private String pesel;
+
+    @Email
+    @NotBlank
+    private String email;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
@@ -54,12 +68,30 @@ public class Author {
         this.books = books;
     }
 
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", pesel='" + pesel + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

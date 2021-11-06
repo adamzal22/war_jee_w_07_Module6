@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<a href="/">Main menu</a>
 <a href="add">Add new book</a>
 <hr>
 <c:forEach items="${books}" var="b">
