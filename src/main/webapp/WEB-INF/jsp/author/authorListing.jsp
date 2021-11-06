@@ -3,6 +3,10 @@
 <a href="/">Main menu</a>
 <a href="add">Add new author</a>
 <hr>
+
+<%@include file="../common/search.jsp"%>
+
+<hr>
 <c:forEach items="${authors}" var="auth">
     <strong><c:out value="${auth.fullName}"/></strong><br>
     <br />

@@ -145,7 +145,7 @@ public class BookController {
     @ResponseBody
     public String findByAuthor(@PathVariable long authorId) {
         Author author = authorDao.findById(authorId);
-        List<Book> allBooksByRating = bookDao.findAllByAuthor(author);
+        List<Book> allBooksByRating = bookRepository.findByAuthors(author);
         return allBooksByRating.stream()
                 .map(book -> book.getId() + " : " + book.getTitle())
                 .collect(Collectors.joining("<br />"));
